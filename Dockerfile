@@ -22,7 +22,7 @@ RUN python -m spacy download en_core_web_sm
 COPY . .
 
 # Expose Streamlit port
-EXPOSE 7860
+EXPOSE 8501
 
 # Run FastAPI in background and launch Streamlit
 CMD ["python", "frontend/streamlit_app.py"]
