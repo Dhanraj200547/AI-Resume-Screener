@@ -16,7 +16,7 @@ if resume and jd:
             result = response.json()
             st.success(f"Match Score: {result['match']}%")
             st.info("Summary:")
-            st.code(result["summary"])
+            st.json(result["summary"])
             st.metric("ATS Score", f"{result['score']}%")
         else:
             st.error("Error in analysis. Check backend logs.")
