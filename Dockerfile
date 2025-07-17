@@ -1,28 +1,20 @@
-# Use a slim Python base image
+# Base Image
 FROM python:3.10-slim
 
-# Set environment variables
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
-
-# Create and set working directory
+# Set working directory
 WORKDIR /app
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y build-essential
+# Copy everything
+COPY . .
 
-# Install Python dependencies
-COPY requirements.txt .
-RUN pip install --upgrade pip && pip install -r requirements.txt
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Download spaCy model
 RUN python -m spacy download en_core_web_sm
 
-# Copy the entire project
-COPY . .
+# Expose ports
+EXPOSE 7860
 
-# Expose Streamlit port
-EXPOSE 8501
-
-# Run FastAPI in background and launch Streamlit
-CMD ["python", "frontend/streamlit_app.py"]
+# Run FastAPI & Streamlit using a script
+CMD ["bash", "-c", "uvicorn app.main:app --host 0.0.0.0 --port 8000 & sleep 3 && streamlit run frontend/streamlit_app.py --server.port 7860 --server.address 0.0.0.0"]
