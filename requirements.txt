@@ -2,7 +2,7 @@ python-multipart
 scikit-learn
 fastapi
 uvicorn
-gradio
+streamlit
 requests
 PyMuPDF
 spacy

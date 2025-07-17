@@ -1,50 +1,22 @@
-import subprocess
-import time
-import gradio as gr
+import streamlit as st
 import requests
 
-subprocess.Popen(["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"])
-time.sleep(3) 
+st.title("AI Resume Screener")
 
-API_URL = "http://localhost:8000/analyze/"
+resume = st.file_uploader("Upload Resume (PDF)", type=["pdf"])
+jd = st.file_uploader("Upload Job Description (PDF)", type=["pdf"])
 
-def analyze_resume(resume_file, jd_file):
-    if resume_file is None or jd_file is None:
-        return "Please upload both files.", None, None
-
-    files = {
-        "resume": ("resume.pdf", resume_file.read(), "application/pdf"),
-        "jd": ("jd.pdf", jd_file.read(), "application/pdf")
-    }
-
-    try:
-        response = requests.post("https://ai-resume-screener-679582856508.asia-south1.run.app/analyze/", files=files)
-        if response.status_code == 200:
+if resume and jd:
+    with st.spinner("Analyzing..."):
+        response = requests.post(
+            "http://127.0.0.1:8000/analyze/",
+            files={"resume": resume.getvalue(), "jd": jd.getvalue()},
+        )
+        if response.ok:
             result = response.json()
-            match_score = f"{result['match']}%"
-            ats_score = f"{result['score']}%"
-            summary = result["summary"]
-            return f"Match Score: {match_score}", ats_score, summary
+            st.success(f"Match Score: {result['match']}%")
+            st.info("Summary:")
+            st.code(result["summary"])
+            st.metric("ATS Score", f"{result['score']}%")
         else:
-            return "Error: Could not analyze resume.", "", ""
-    except Exception as e:
-        return f"Exception: {str(e)}", "", ""
-
-# UI
-resume_input = gr.File(label="Upload Resume (PDF)", type="binary")
-jd_input = gr.File(label="Upload Job Description (PDF)", type="binary")
-
-match_score_output = gr.Textbox(label="Match Score")
-ats_score_output = gr.Textbox(label="ATS Score")
-summary_output = gr.JSON(label="Resume Summary")
-
-interface = gr.Interface(
-    fn=analyze_resume,
-    inputs=[resume_input, jd_input],
-    outputs=[match_score_output, ats_score_output, summary_output],
-    title="AI Resume Screener (Gradio)",
-    description="Upload a resume and job description to check ATS score and match percentage."
-)
-
-if __name__ == "__main__":
-    interface.launch(server_name="0.0.0.0", server_port=int(os.getenv("PORT", 7860)))
+            st.error("Error in analysis. Check backend logs.")
