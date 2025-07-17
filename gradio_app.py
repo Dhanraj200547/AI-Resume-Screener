@@ -1,15 +1,20 @@
+import subprocess
+import time
 import gradio as gr
 import requests
 
-API_URL = "http://127.0.0.1:8000/analyze/"
+subprocess.Popen(["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"])
+time.sleep(3) 
+
+API_URL = "http://localhost:8000/analyze/"
 
 def analyze_resume(resume_file, jd_file):
     if resume_file is None or jd_file is None:
         return "Please upload both files.", None, None
 
     files = {
-        "resume": resume_file,
-        "jd": jd_file
+        "resume": ("resume.pdf", resume_file.read(), "application/pdf"),
+        "jd": ("jd.pdf", jd_file.read(), "application/pdf")
     }
 
     try:
@@ -19,13 +24,13 @@ def analyze_resume(resume_file, jd_file):
             match_score = f"{result['match']}%"
             ats_score = f"{result['score']}%"
             summary = result["summary"]
-            return f"✅ Match Score: {match_score}", ats_score, summary
+            return f"Match Score: {match_score}", ats_score, summary
         else:
-            return "❌ Error: Could not analyze resume.", "", ""
+            return "Error: Could not analyze resume.", "", ""
     except Exception as e:
-        return f"❌ Exception: {str(e)}", "", ""
+        return f"Exception: {str(e)}", "", ""
 
-# Build the UI
+# UI
 resume_input = gr.File(label="Upload Resume (PDF)", type="binary")
 jd_input = gr.File(label="Upload Job Description (PDF)", type="binary")
 
@@ -42,4 +47,4 @@ interface = gr.Interface(
 )
 
 if __name__ == "__main__":
-    interface.launch()
+    interface.launch(server_name="0.0.0.0", server_port=7860)
