@@ -25,4 +25,4 @@ COPY . .
 EXPOSE 7860
 
 # Run FastAPI in background and launch Streamlit
-CMD ["python", "streamlit_app.py"]
+CMD ["python", "frontend/streamlit_app.py"]
