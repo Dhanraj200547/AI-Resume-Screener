@@ -1,8 +1,9 @@
+python-multipart
+scikit-learn
 fastapi
 uvicorn
-python-multipart
-spacy
-PyMuPDF
-scikit-learn
-requests
 gradio
+requests
+PyMuPDF
+spacy
+
