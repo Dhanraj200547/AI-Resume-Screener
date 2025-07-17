@@ -13,7 +13,7 @@ def analyze_resume(resume_file, jd_file):
     }
 
     try:
-        response = requests.post(API_URL, files=files)
+        response = requests.post("https://ai-resume-screener-679582856508.asia-south1.run.app/analyze/", files=files)
         if response.status_code == 200:
             result = response.json()
             match_score = f"{result['match']}%"
