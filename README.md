@@ -1,57 +1,49 @@
-
-```markdown
-# ⚡ AI Resume Screener – Streamlit + FastAPI on Google Cloud Run
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python Version](https://img.shields.io/badge/Python-3.10%2B-blue)](https://www.python.org/)
-[![Built with Streamlit](https://img.shields.io/badge/Streamlit-Built-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io/)
-[![Powered by FastAPI](https://img.shields.io/badge/FastAPI-Powered-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
-[![Deployed on Cloud Run](https://img.shields.io/badge/Google%20Cloud%20Run-Deployed-4285F4?logo=google-cloud&logoColor=white)](https://cloud.google.com/run)
+# AI Resume Screener –  spaCy and Google Cloud Run
 
 An end-to-end application that leverages **Streamlit** as the interactive frontend and **FastAPI** as the robust backend to intelligently screen resumes against job descriptions. This solution is fully containerized using **Docker** and deployed to **Google Cloud Run** for highly scalable, cost-efficient, and serverless performance.
 
 ---
 
-## 📸 Live Application
+##  Live Application
 
 Experience the AI Resume Screener in action!
 
-👉 [**Launch the App Here!**](https://ai-resume-screener-885446706784.europe-west1.run.app)
+ [**Launch the App Here!**](https://ai-resume-screener-885446706784.europe-west1.run.app)
 
 ---
 
-## 💡 Features
+## Features
 
-* 📝 **Effortless Document Upload:** Easily upload resumes (PDF) and Job Descriptions (PDF).
-* 🧠 **Intelligent Matching:** Utilizes advanced spaCy models for smart resume-to-JD similarity scoring.
-* 🎯 **Intuitive User Interface:** Powered by Streamlit for a smooth and interactive user experience.
-* ⚙️ **Robust Backend Logic:** FastAPI handles efficient text extraction, sophisticated similarity scoring, and summarization.
-* 🚀 **Scalable Cloud Deployment:** Seamlessly deployed on Google Cloud Run, ensuring high availability and auto-scaling.
+*  **Effortless Document Upload:** Easily upload resumes (PDF) and Job Descriptions (PDF).
+*  **Intelligent Matching:** Utilizes advanced spaCy models for smart resume-to-JD similarity scoring.
+*  **Intuitive User Interface:** Powered by Streamlit for a smooth and interactive user experience.
+*  **Robust Backend Logic:** FastAPI handles efficient text extraction, sophisticated similarity scoring, and summarization.
+*  **Scalable Cloud Deployment:** Seamlessly deployed on Google Cloud Run, ensuring high availability and auto-scaling.
 
 ---
 
-## 🗂️ Project Structure
+##  Project Structure
 
 ```
 
 📦 AI-Resume-Screener/
-├── app/                  \# FastAPI Backend Services
-│   ├── JDMatcher.py      \# Job Description matching logic
-│   ├── Scorer.py         \# Resume scoring logic
-│   ├── TextExtractor.py  \# PDF text extraction
-│   ├── Summarize.py      \# Text summarization (if used)
-│   └── main.py           \# Main FastAPI application entry point
-├── frontend/             \# Streamlit Frontend
-│   └── streamlit\_app.py  \# Streamlit application entry point
-├── requirements.txt      \# Python dependencies for both frontend and backend
-├── Dockerfile            \# Docker container definition for unified deployment
-└── README.md             \# You're currently reading this\!
+├── app/                  
+│   ├── JDMatcher.py      
+│   ├── Scorer.py         
+│   ├── TextExtractor.py  
+│   ├── Summarize.py      
+│   └── main.py           
+├── frontend/             
+│   └── streamlit_app.py  
+├── requirements.txt      
+├── Dockerfile            
+└── README.md             
 
 ````
 
 ---
 
-## 🚀 Run Locally
+##  Run Locally
 
 Follow these steps to get the AI Resume Screener running on your local machine.
 
@@ -102,7 +94,7 @@ Once both servers are running, open your web browser and navigate to the address
 
 -----
 
-## 📦 Docker Deployment
+##  Docker Deployment
 
 This project is designed for unified Docker deployment, running both FastAPI and Streamlit within a single container.
 
@@ -139,7 +131,7 @@ CMD ["bash", "-c", "uvicorn app.main:app --host 0.0.0.0 --port 8000 & sleep 3 &&
 
 -----
 
-## ✅ Requirements
+##  Requirements
 
 The `requirements.txt` file lists the core Python dependencies:
 
@@ -155,7 +147,7 @@ The `requirements.txt` file lists the core Python dependencies:
 
 -----
 
-## 🛡️ Tips for Optimization
+##  Tips for Optimization
 
 For production deployments on Google Cloud Run, consider these best practices:
 
@@ -167,18 +159,18 @@ For production deployments on Google Cloud Run, consider these best practices:
 
 -----
 
-## 🧠 Future Enhancements
+##  Future Enhancements
 
 We are continuously working to improve the AI Resume Screener\! Planned enhancements include:
 
-  * ✨ **Advanced AI Ranking:** Integrating more sophisticated AI models for nuanced resume ranking and candidate scoring.
-  * 📧 **Automated Candidate Communication:** Features to email shortlisted candidates directly from the application.
-  * 🧑‍💼 **Employer Dashboard:** A dedicated dashboard for employers to manage job postings, view applications, and track screening progress.
-  * 📊 **Analytics and Insights:** Providing deeper analytics on resume trends, job description performance, and hiring metrics.
+  *  **Advanced AI Ranking:** Integrating more sophisticated AI models for nuanced resume ranking and candidate scoring.
+  *  **Automated Candidate Communication:** Features to email shortlisted candidates directly from the application.
+  *  **Employer Dashboard:** A dedicated dashboard for employers to manage job postings, view applications, and track screening progress.
+  *  **Analytics and Insights:** Providing deeper analytics on resume trends, job description performance, and hiring metrics.
 
 -----
 
-## 🙌 Contributing
+##  Contributing
 
 Contributions are highly encouraged\! If you have suggestions for improvements, new features, or bug fixes, please feel free to:
 
@@ -190,7 +182,7 @@ For major changes, please open an issue first to discuss your proposed changes.
 
 -----
 
-## 💬 Contact
+##  Contact
 
 Connect with the creator:
 
